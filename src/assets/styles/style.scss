@@ -1,0 +1,153 @@
+@import '_variables.scss';
+
+
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('~@/assets/styles/fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('~@/assets/styles/fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Bold Italic';
+    src: url('~@/assets/styles/fonts/OpenSans-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Extra Bold';
+    src: url('~@/assets/styles/fonts/OpenSans-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Extra Bold Italic';
+    src: url('~@/assets/styles/fonts/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Italic';
+    src: url('~@/assets/styles/fonts/OpenSans-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Light';
+    src: url('~@/assets/styles/fonts/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans Light Italic';
+    src: url('~@/assets/styles/fonts/OpenSans-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans SemiBold';
+    src: url('~@/assets/styles/fonts/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans SemiBold Italic';
+    src: url('~@/assets/styles/fonts/OpenSans-SemiBoldItalic.ttf') format('truetype');
+}
+
+h1, h2, h3, h4 {
+    font-family:'Open Sans Extra Bold';
+    color:$fontdark;
+}
+#app {
+    max-width:$deskTopWidth;
+    margin:auto;
+  }
+
+  .box-shadow {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(239, 239, 239, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(239, 239, 239, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(239, 239, 239, 0.75);
+  }
+
+  .big-button {
+    padding: 10px 20px;
+    background-color: $buttonColor;
+    border: 1px solid $buttonColor;
+    color: white;
+    cursor:pointer;
+    font-family: 'Open Sans SemiBold';
+    margin:5px;
+  }
+
+  .big-input {
+      border:solid 1px $lightergrey;
+      padding:12px 5px;
+      background-color:$background;
+      min-width: 200px;
+      font-family: 'Open Sans SemiBold';
+  }
+  
+  .green {
+    color:$green;
+    fill:$green;
+  }
+  .red {
+    color:$red;
+    fill:$red;
+  }
+
+
+  .Stock {
+    flex: 1 1 0;
+    width: $deskTopWidth/3;
+  .stock-info {
+    margin:10px;
+    height: $desktopHeight;
+    padding: 5px 0px 5px 0px;
+    position:relative;
+    border:none;
+    background-color:white;
+    .graphic {
+      width:25%;
+      display:inline-block;
+      vertical-align: top;
+    }
+    .text-info {
+      width:75%;
+      display:inline-block;
+      vertical-align: top;
+    h4 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top:10px;
+      margin-bottom:0px;
+    }
+    .symbol-name {
+      font-family:'Open Sans SemiBold';
+      color:$grey;
+      font-size:12px;
+    }
+    .main-stock {
+      position:relative;
+      .curr-price {
+        width: 35%;
+        display: inline-block;
+        font-family: 'Open Sans';
+        font-size: 22px;
+        color:$fontdark;
+      }
+      .diff-price {
+        width:65%;
+        display:inline-block;
+        font-size:12px;
+        font-family: 'Open Sans SemiBold'
+      }
+    }
+    .secondary-stock {
+      margin-top:5px;
+      span {
+        padding: 2px 10px 0px 0px;
+      }
+    }
+    }
+  }
+  }
