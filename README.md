@@ -1,3 +1,6 @@
+Demo is Here
+http://ec2-3-132-212-217.us-east-2.compute.amazonaws.com/
+
 # Stock Watcher
 
 Your task is to build a simple web application for a user to add basic stock
