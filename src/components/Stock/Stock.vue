@@ -6,9 +6,11 @@
       </div>
       <div class="text-info">
           <div style="padding-left:15px;">
-                    <h4>{{stockNameSymbol.name}}</h4>
-        <div class="symbol-name">{{stockNameSymbol.symbol}}</div>
-        <div class="main-stock">
+          <div class="mobile-left">
+            <h4>{{stockNameSymbol.name}}</h4>
+            <div class="symbol-name">{{stockNameSymbol.symbol}}</div>
+          </div>
+        <div class="main-stock mobile-right">
           <div class="curr-price" v-if="stockInfo">{{currPrice.toFixed(2)}}</div>
           <div class="diff-price" v-bind:class="{'green':!negative, 'red': negative}">
             <Arrow v-bind:negative="negative" />&nbsp;{{diff.toFixed(2)}}&nbsp;({{diffPercent.toFixed(2)}}%)
@@ -68,10 +70,9 @@ export default {
           this.negative = false
         }
       }
-      console.log(this.stockInfo, this.stockNameSymbol)
     },
     async getStockInfo () {
-      const out = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.stockNameSymbol.symbol}&apikey=HY0JP87WH3PG17X6`)
+      const out = await fetch(process.env.VUE_APP_API_INFO_STOCK.replace('API_KEY', process.env.VUE_APP_API_KEY).replace('THE_STOCK', this.stockNameSymbol.symbol))
         .then(out => out.json())
         .then(out => out['Global Quote'] ? out['Global Quote'] : null)
         .catch(e => {

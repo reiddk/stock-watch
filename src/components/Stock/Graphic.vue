@@ -21,11 +21,9 @@ export default {
   },
   methods: {
     buildGradient () {
-      console.log(this.$refs)
       const canvasObj = this.$refs.canvasGraph
       canvasObj.width = canvasObj.height *
     (canvasObj.clientWidth / canvasObj.clientHeight)
-      console.log(canvasObj)
       const context = canvasObj.getContext('2d')
       const gradient = context.createLinearGradient(0, 100, 0, 0)
       let startColor = 'green'
@@ -56,7 +54,7 @@ export default {
       context3.fillText(String(this.high), (canvasObj.width / 3) + letterHeight, (canvasObj.height / 6) + letterHeight)
 
       const context4 = canvasObj.getContext('2d')
-      context4.font = `${letterHeight}px Sans`
+      context4.font = `${letterHeight}px bold arial`
       context4.fillStyle = 'white'
       context4.fillText(String(this.low), (canvasObj.width / 3) + letterHeight, (5 * canvasObj.height / 6))
 
@@ -68,9 +66,7 @@ export default {
       const topLine = (canvasObj.height / 6)
       const bottomLine = (5 * canvasObj.height / 6)
       const currPostion = (bottomLine - topLine)
-      console.log('currposition', ((this.currPrice - this.low) / (this.high - this.low)) * currPostion)
       const placeOnLine = bottomLine - ((this.currPrice - this.low) / (this.high - this.low)) * currPostion
-      console.log(placeOnLine)
       const heightTriangleStart = placeOnLine + triangleSize
       const heightTriangleEnd = placeOnLine - triangleSize
 
@@ -95,11 +91,4 @@ export default {
 </script>
 
 <style lang="scss">
-.Graphic {
-    canvas {
-        width:100%;
-        height: $desktopHeight;
-        fill:red;
-    }
-}
 </style>

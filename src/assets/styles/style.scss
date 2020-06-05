@@ -1,7 +1,5 @@
 @import '_variables.scss';
 
-
-
 @font-face {
     font-family: 'Open Sans';
     src: url('~@/assets/styles/fonts/OpenSans-Regular.ttf') format('truetype');
@@ -57,7 +55,13 @@ h1, h2, h3, h4 {
     color:$fontdark;
 }
 #app {
+  h1 {
+    margin-left:10px;
+  }
     max-width:$deskTopWidth;
+    @media (max-width: $deskTopWidth) {
+      max-width:$tabletWidth;
+    }
     margin:auto;
   }
 
@@ -75,6 +79,13 @@ h1, h2, h3, h4 {
     cursor:pointer;
     font-family: 'Open Sans SemiBold';
     margin:5px;
+    ::after {
+      
+    content: "ADD STOCK";
+    @media (max-width: $tabletWidth) {
+      content: "ADD"
+    }
+    }
   }
 
   .big-input {
@@ -93,27 +104,74 @@ h1, h2, h3, h4 {
     color:$red;
     fill:$red;
   }
-
-
+  .AddStock {
+    margin:10px;
+  }
+  .Graphic {
+    canvas {
+        width:100%;
+        height: $desktopHeight;
+        @media (max-width: $deskTopWidth) {
+          height: $tabletHeight;
+        }
+        fill:red;
+    }
+  }
+  
   .Stock {
     flex: 1 1 0;
     width: $deskTopWidth/3;
+    @media (max-width: $deskTopWidth) {
+      width:$tabletWidth/2;
+    }
+    @media (max-width: $tabletWidth) {
+      width:$mobileWidth;
+    }
   .stock-info {
     margin:10px;
     height: $desktopHeight;
-    padding: 5px 0px 5px 0px;
+    @media (max-width: $deskTopWidth) {
+      height: $tabletHeight;
+    }
+    @media (max-width: $tabletWidth) {
+      height:$mobileHeight;
+    }
+    padding: 0px;
     position:relative;
     border:none;
     background-color:white;
     .graphic {
       width:25%;
+      @media (max-width: $tabletWidth) {
+        display:none;
+      }
       display:inline-block;
       vertical-align: top;
     }
     .text-info {
       width:75%;
+      @media (max-width: $tabletWidth) {
+        width:100%;
+        position:relative;
+        padding-top: 10px;
+      }
       display:inline-block;
       vertical-align: top;
+      .mobile-left {
+        @media (max-width: $tabletWidth) {
+          width:60%;
+          float:left;
+        }
+      }
+      .mobile-right {
+        @media (max-width: $tabletWidth) {
+          width:35%;
+          float:right;
+          position:relative;
+          text-align:right;
+          padding-right:5%;
+        }
+      }
     h4 {
       white-space: nowrap;
       overflow: hidden;
@@ -130,6 +188,9 @@ h1, h2, h3, h4 {
       position:relative;
       .curr-price {
         width: 35%;
+        @media (max-width: $tabletWidth) {
+          width:100%;
+        }
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 22px;
@@ -137,6 +198,10 @@ h1, h2, h3, h4 {
       }
       .diff-price {
         width:65%;
+        @media (max-width: $tabletWidth) {
+          width:100%;
+          
+        }
         display:inline-block;
         font-size:12px;
         font-family: 'Open Sans SemiBold'
@@ -144,10 +209,66 @@ h1, h2, h3, h4 {
     }
     .secondary-stock {
       margin-top:5px;
+      overflow-wrap:break-word;
+      @media (max-width: $tabletWidth) {
+        display:none;
+      }
       span {
         padding: 2px 10px 0px 0px;
+        white-space:nowrap;
       }
     }
     }
   }
   }
+
+  .error-message {
+    background-color: #ff363626;
+    border: solid red 1px;
+    border-radius: 2px;
+    padding: 10px;
+    font-family: 'Open Sans Bold Italic';
+    color:$fontdark;
+    overflow:hidden;
+    max-height:0px;
+    visibility:hidden;
+  }
+  
+  .error-message.show {
+    visibility:visible;
+    transition:max-height .5s ease-in-out;
+    max-height:30px;
+  }
+
+  .loading-icon {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+  .loading-icon:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: loading-icon 1.2s infinite;
+  }
+  @keyframes loading-icon {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+  

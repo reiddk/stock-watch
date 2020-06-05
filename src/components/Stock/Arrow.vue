@@ -11,9 +11,6 @@ export default {
   name: 'Arrow',
   props: {
     negative: Boolean
-  },
-  mounted () {
-    console.log(this.negative)
   }
 }
 </script>

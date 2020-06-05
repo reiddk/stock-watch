@@ -1,8 +1,9 @@
 <template>
   <div class="AddStock">
       <input class="big-input" placeholder="Enter stock symbol" :value="stockToAdd.toUpperCase()" @input="stockToAdd = $event.target.value.toUpperCase()" v-on:keyup.enter="setStock()"/>
-      <button class="box-shadow big-button" type="button" v-on:click="setStock()">ADD STOCK</button>
-      <div class="error-message" v-show="errorMessage.length">{{errorMessage}}</div>
+      <button class="box-shadow big-button" type="button" v-on:click="setStock()"><span></span></button>
+      <div v-show="loading" class="loading-icon"></div>
+      <div class="error-message" v-bind:class="{'show':errorMessage.length}">{{errorMessage}}</div>
   </div>
 </template>
 
@@ -17,15 +18,23 @@ export default {
   data () {
     return {
       stockToAdd: '',
-      errorMessage: ''
+      errorMessage: '',
+      loading: false
     }
   },
   methods: {
     stockAlreadySet () {
-      return this.CurrStocks.includes(s => s.symbol === this.stockToAdd)
+      console.log(this.CurrStocks, this.stockToAdd)
+      for (const s of this.CurrStocks) {
+        if (s.symbol.toUpperCase() === this.stockToAdd.toUpperCase()) {
+          return true
+        }
+      }
+      return false
+      // return this.CurrStocks.includes(s => { console.log(s); return s.symbol.toUpperCase() === this.stockToAdd.toUpperCase() })
     },
     async stockValid () {
-      const stock = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${this.stockToAdd}&apikey=HY0JP87WH3PG17X6`)
+      const stock = await fetch(process.env.VUE_APP_API_VALIDATE_STOCK.replace('API_KEY', process.env.VUE_APP_API_KEY).replace('THE_STOCK', this.stockToAdd))
         .then(out => out.json())
         .then(out => {
           if (!out ||
@@ -58,7 +67,9 @@ export default {
         this.errorMessage = 'Stock has already been added'
         return
       }
+      this.loading = true
       const stockNameSymbol = await this.stockValid()
+      this.loading = false
       if (!stockNameSymbol) {
         this.errorMessage = 'Stock name is invalid'
         return
